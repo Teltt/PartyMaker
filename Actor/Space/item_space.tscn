@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://dy4p48b3t5sdg"]
+
+[ext_resource type="Script" uid="uid://ccujyttn46qym" path="res://Actor/Space/Script/ItemSpace.gd" id="1_hkosx"]
+[ext_resource type="PackedScene" uid="uid://kjpdui1jomus" path="res://Actor/Space/Helper/EditorSpaceCollision.tscn" id="2_a75l6"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="2_vj257"]
+[ext_resource type="Script" uid="uid://cb4b6uaqva8hs" path="res://Resource/Params/SpaceParams.gd" id="3_xcleh"]
+
+[sub_resource type="Resource" id="Resource_ur8vp"]
+script = ExtResource("2_vj257")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("2_vj257")
+
+[sub_resource type="Resource" id="Resource_uuamw"]
+script = ExtResource("3_xcleh")
+blue = true
+can_land = false
+must_go = false
+event_params = SubResource("Resource_ur8vp")
+metadata/_custom_type_script = ExtResource("3_xcleh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hkosx"]
+albedo_color = Color(0.176471, 0.513726, 0.141176, 1)
+metallic = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a75l6"]
+albedo_color = Color(0.176471, 0.513726, 0.141176, 1)
+metallic = 1.0
+
+[node name="ItemSpace" type="Node3D"]
+script = ExtResource("1_hkosx")
+space_params = SubResource("Resource_uuamw")
+can_land = false
+params = SubResource("Resource_ur8vp")
+
+[node name="StaticBody3D" parent="." instance=ExtResource("2_a75l6")]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28596, 1.20298)
+pixel_size = 0.023
+outline_modulate = Color(0, 0, 0, 0.215686)
+text = "ITEM"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.173229, 0)
+radius = 1.125
+height = 0.262695
+material = SubResource("StandardMaterial3D_hkosx")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.182385, 0)
+operation = 2
+radius = 1.0
+height = 0.364502
+material = SubResource("StandardMaterial3D_a75l6")

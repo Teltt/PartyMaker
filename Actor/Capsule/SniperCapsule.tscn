@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxobvgnj53s7d"]
+
+[ext_resource type="PackedScene" uid="uid://db4affpnsgwy7" path="res://Actor/Capsule/CapsuleBase.tscn" id="1_8eqf4"]
+[ext_resource type="Script" uid="uid://bji0junqpi7uq" path="res://Actor/Capsule/CapsuleSniper.gd" id="1_bpn1p"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="2_235go"]
+[ext_resource type="Texture2D" uid="uid://dt7go7mll1yyc" path="res://Resource/Graphics/Capsules/sniper/Icon.png" id="2_u31h3"]
+[ext_resource type="Script" uid="uid://csva6uwttkw5r" path="res://Resource/Params/CapsuleParams.gd" id="3_wlrtn"]
+
+[sub_resource type="Resource" id="Resource_55p1v"]
+script = ExtResource("2_235go")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("2_235go")
+
+[sub_resource type="Resource" id="Resource_n3i77"]
+script = ExtResource("3_wlrtn")
+icon = ExtResource("2_u31h3")
+price = 4
+space_attach = false
+attaches = false
+event_params = SubResource("Resource_55p1v")
+metadata/_custom_type_script = ExtResource("3_wlrtn")
+
+[node name="CapsuleBase" instance=ExtResource("1_8eqf4")]
+script = ExtResource("1_bpn1p")
+capsule_params = SubResource("Resource_n3i77")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_u31h3")

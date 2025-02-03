@@ -1,0 +1,256 @@
+[gd_scene load_steps=24 format=3 uid="uid://c3nrwo1gf7s6v"]
+
+[ext_resource type="Script" uid="uid://ty5pjtva6r22" path="res://Actor/Player/Player.gd" id="1_0daqu"]
+[ext_resource type="Resource" uid="uid://b5l2x2doviwbh" path="res://Resource/Controls/p1.tres" id="2_06fww"]
+[ext_resource type="PackedScene" uid="uid://ct0e3w7637tj7" path="res://Actor/Amount_Mgr/amount_mgr.tscn" id="3_06fww"]
+[ext_resource type="Script" uid="uid://bycsmfemjt6sm" path="res://Scripts/Component/Party/Capsule_MGR.gd" id="3_nd20l"]
+[ext_resource type="ArrayMesh" uid="uid://0a42xvtug1ky" path="res://Resource/Model/Coin.obj" id="4_0wb01"]
+[ext_resource type="Script" uid="uid://dm1xj3n4wdboi" path="res://Scripts/Component/Visual/line.gd" id="5_nd20l"]
+[ext_resource type="ArrayMesh" uid="uid://d0wn7kx2i7jnt" path="res://Resource/Model/ThrowEffect.obj" id="5_qoqkr"]
+[ext_resource type="PackedScene" uid="uid://baockq57m6w4t" path="res://Actor/Capsule/SmallMushCapsule.tscn" id="7_40iew"]
+[ext_resource type="Script" uid="uid://cblrkctpi0nxl" path="res://Scripts/Component/Visual/PlayerLayer.gd" id="9_o43pg"]
+[ext_resource type="Texture2D" uid="uid://04awmy1441ab" path="res://Resource/Graphics/DiceBlock.png" id="12_m1tbt"]
+[ext_resource type="Texture2D" uid="uid://ddh4fjhtkahs6" path="res://Resource/Graphics/StarSpace.png" id="13_iuy7w"]
+[ext_resource type="Texture2D" uid="uid://c125n5y4ahnkj" path="res://Resource/Graphics/RedSpace.png" id="13_van2h"]
+[ext_resource type="Texture2D" uid="uid://bokjeh2f0io4t" path="res://Resource/Graphics/Coin.png" id="14_40iew"]
+[ext_resource type="AudioStream" uid="uid://v7b8efnyj85y" path="res://CopyRight/Audio/Dice Pop SMP.ogg" id="14_iuy7w"]
+[ext_resource type="Script" uid="uid://djd0apf52p7ge" path="res://Actor/Player/capsuledrawer.gd" id="16_ab7l3"]
+[ext_resource type="AudioStream" uid="uid://brenltm3a1yrb" path="res://CopyRight/Audio/Coin.WAV" id="16_agtul"]
+[ext_resource type="Script" uid="uid://c72e1yx5ky1yb" path="res://Actor/Player/travel.gd" id="16_van2h"]
+[ext_resource type="AudioStream" uid="uid://xc15o2vtc2t5" path="res://CopyRight/Audio/Pass Space MPS.ogg" id="17_55p1v"]
+[ext_resource type="AudioStream" uid="uid://dvm8ym4j8moje" path="res://CopyRight/Audio/LandSpace.ogg" id="18_nifj2"]
+
+[sub_resource type="Shader" id="Shader_iuy7w"]
+code = "shader_type spatial;
+instance uniform vec4 color;
+
+void fragment() {
+	ALBEDO = color.xyz;
+	ALPHA = color.a;
+	// Called for every pixel the material is visible on.
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40iew"]
+render_priority = 0
+shader = SubResource("Shader_iuy7w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nd20l"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ab7l3"]
+
+[node name="Player" type="Node3D" node_paths=PackedStringArray("travel")]
+script = ExtResource("1_0daqu")
+controls = ExtResource("2_06fww")
+travel = NodePath("Travel")
+metadata/_edit_group_ = true
+
+[node name="PlayerLayer" type="Node" parent="." node_paths=PackedStringArray("visual_instances", "canvas_items", "players")]
+script = ExtResource("9_o43pg")
+visual_instances = [NodePath("../Line/Line"), NodePath("../Line/Tip/CSGPolygon3D"), NodePath("../SpacesRolled"), NodePath("../Dice"), NodePath("../Dice/Label3D"), NodePath("../Coins/MultiMeshInstance3D"), NodePath("../Stars/MultiMeshInstance3D")]
+canvas_items = [NodePath("../QuickMessages"), NodePath("../Node2D/TextureRect"), NodePath("../Node2D/Space"), NodePath("../Node2D/TextureRect/Star"), NodePath("../Node2D/TextureRect/Star/Label"), NodePath("../Node2D/TextureRect/Coin"), NodePath("../Node2D/TextureRect/Coin/Label"), NodePath("../Node2D/TextureRect/Capsule"), NodePath("../Node2D/TextureRect/Capsule2"), NodePath("../Node2D/TextureRect/Capsule3"), NodePath("../Node2D/Label")]
+players = [NodePath("..")]
+
+[node name="Coins" parent="." instance=ExtResource("3_06fww")]
+mesh = ExtResource("4_0wb01")
+
+[node name="Stars" parent="." instance=ExtResource("3_06fww")]
+
+[node name="CapsuleMgr" type="Node3D" parent="." node_paths=PackedStringArray("throw_label", "inventory")]
+top_level = true
+script = ExtResource("3_nd20l")
+throw_label = NodePath("../Node2D/Label")
+inventory = [null]
+
+[node name="CapsuleBase" parent="CapsuleMgr" node_paths=PackedStringArray("my_player") instance=ExtResource("7_40iew")]
+visible = false
+my_player = NodePath("../..")
+
+[node name="ThrowEffect" type="MeshInstance3D" parent="CapsuleMgr"]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0)
+top_level = true
+visible = false
+mesh = ExtResource("5_qoqkr")
+
+[node name="ThrowTarget" type="CSGCylinder3D" parent="CapsuleMgr"]
+instance_shader_parameters/color = Vector4(0, 0, 0, 1)
+radius = 1.455
+height = 0.001
+material = SubResource("ShaderMaterial_40iew")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.809017, 0.587785, 0, -0.587785, 0.809017, 0, 0, 0)
+
+[node name="CamTarget" type="Node3D" parent="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442466, 7.7936)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.564286, 0)
+instance_shader_parameters/color = Vector4(1, 1, 1, 1)
+radius = 0.4
+height = 1.5
+cone = true
+material = SubResource("ShaderMaterial_40iew")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.691561, 0)
+radius = 0.2
+
+[node name="Line" type="Node3D" parent="."]
+script = ExtResource("5_nd20l")
+end = Vector3(1, 0, 0)
+
+[node name="Line" type="CSGPolygon3D" parent="Line"]
+polygon = PackedVector2Array(-0.05, -0.05, -0.05, 0.05, 0.05, 0.05, 0.05, -0.05)
+material = SubResource("StandardMaterial3D_nd20l")
+
+[node name="Tip" type="Node3D" parent="Line"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0136499, 0, -1)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Line/Tip"]
+transform = Transform3D(-2.18557e-08, -0.25, -4.37114e-09, 0, -1.09278e-08, 0.1, -0.5, 1.09278e-08, -1.64203e-16, -0.025, 0.188, 0)
+polygon = PackedVector2Array(0, -1, 0.00450158, 1.01957, 0.994601, 0.00127471, 0, -1)
+depth = 4.0
+material = SubResource("StandardMaterial3D_nd20l")
+
+[node name="QuickMessages" type="Control" parent="."]
+top_level = true
+visibility_layer = 0
+layout_mode = 3
+anchors_preset = 0
+offset_left = -544.0
+offset_top = -281.0
+offset_right = -544.0
+offset_bottom = -281.0
+scale = Vector2(1.03142, 1.09118)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-576, -319)
+scale = Vector2(1.71904, 1.81863)
+
+[node name="Space" type="TextureRect" parent="Node2D"]
+offset_left = 74.4602
+offset_top = 7.14824
+offset_right = 173.46
+offset_bottom = 106.148
+scale = Vector2(0.74, 0.74)
+texture = ExtResource("13_van2h")
+
+[node name="TextureRect" type="NinePatchRect" parent="Node2D"]
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 133.0
+offset_bottom = 99.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("12_m1tbt")
+
+[node name="Star" type="TextureRect" parent="Node2D/TextureRect"]
+layout_mode = 0
+offset_left = -4.5
+offset_top = 2.0
+offset_right = 49.5
+offset_bottom = 55.0
+texture = ExtResource("13_iuy7w")
+
+[node name="Label" type="Label" parent="Node2D/TextureRect/Star"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 9.0
+offset_right = 55.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(0.0687983, 0.0687983, 0.0687983, 1)
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+
+[node name="Coin" type="TextureRect" parent="Node2D/TextureRect"]
+layout_mode = 0
+offset_left = 58.5
+offset_top = 1.0
+offset_right = 122.5
+offset_bottom = 65.0
+texture = ExtResource("14_40iew")
+
+[node name="Label" type="Label" parent="Node2D/TextureRect/Coin"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 10.0
+offset_right = 59.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0.0687983, 0.0687983, 0.0687983, 1)
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+
+[node name="Capsule" type="Node2D" parent="Node2D/TextureRect" node_paths=PackedStringArray("player")]
+position = Vector2(17.5, 121.25)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("16_ab7l3")
+player = NodePath("../../..")
+
+[node name="Capsule2" type="Node2D" parent="Node2D/TextureRect" node_paths=PackedStringArray("player")]
+position = Vector2(67.5, 121.25)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("16_ab7l3")
+id = 1
+player = NodePath("../../..")
+
+[node name="Capsule3" type="Node2D" parent="Node2D/TextureRect" node_paths=PackedStringArray("player")]
+position = Vector2(117.5, 121.25)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("16_ab7l3")
+id = 2
+player = NodePath("../../..")
+
+[node name="Label" type="Label" parent="Node2D"]
+offset_left = 24.0
+offset_top = 104.0
+offset_right = 64.0
+offset_bottom = 127.0
+
+[node name="SpacesRolled" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25419, 0)
+pixel_size = 0.023
+text = "5
+"
+
+[node name="Dice" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25419, 0)
+mesh = SubResource("BoxMesh_ab7l3")
+
+[node name="Label3D" type="Label3D" parent="Dice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51)
+pixel_size = 0.023
+text = "10"
+
+[node name="Travel" type="Node3D" parent="." node_paths=PackedStringArray("p", "node3d", "pass_sfx", "land_sfx")]
+script = ExtResource("16_van2h")
+p = NodePath("..")
+node3d = NodePath("..")
+pass_sfx = NodePath("../SFX/PassSpace")
+land_sfx = NodePath("../SFX/LandSpace")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="DicePop" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("14_iuy7w")
+volume_db = -7.0
+max_polyphony = 3
+
+[node name="Coin" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("16_agtul")
+volume_db = 1.0
+
+[node name="PassSpace" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("17_55p1v")
+volume_db = -7.0
+pitch_scale = 1.25
+max_polyphony = 4
+
+[node name="LandSpace" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("18_nifj2")
+max_polyphony = 4
+
+[editable path="Coins"]
+[editable path="Stars"]

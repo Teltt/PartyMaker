@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=3 uid="uid://dfoeh1r3shs4l"]
+
+[ext_resource type="Script" uid="uid://bmm374ra7lbi0" path="res://Actor/Space/CoinSpread_Space.gd" id="2_o27vw"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="2_smkay"]
+[ext_resource type="Script" uid="uid://cb4b6uaqva8hs" path="res://Resource/Params/SpaceParams.gd" id="3_2hr81"]
+[ext_resource type="Texture2D" uid="uid://dwlwxy3khd4q3" path="res://Resource/Graphics/Space/SpaceBlank.png" id="3_no51s"]
+[ext_resource type="Texture2D" uid="uid://dq06q1murubsc" path="res://Resource/Graphics/Space/PassRing.png" id="4_lmr78"]
+[ext_resource type="Texture2D" uid="uid://ddtllroe7hc8v" path="res://Resource/Graphics/Space/EventIcon.png" id="5_ihwce"]
+[ext_resource type="Texture2D" uid="uid://sbo6my8mhoay" path="res://Resource/Graphics/Space/Shine.png" id="6_uk3w5"]
+
+[sub_resource type="Resource" id="Resource_cfxoy"]
+script = ExtResource("2_smkay")
+after_children = false
+before_parent = false
+event_name = "CoinSpread"
+
+[sub_resource type="Resource" id="Resource_h4ord"]
+script = ExtResource("3_2hr81")
+blue = true
+can_land = true
+must_go = false
+event_params = SubResource("Resource_cfxoy")
+
+[node name="CoinSpreadSpace" type="Sprite2D"]
+script = ExtResource("2_o27vw")
+space_params = SubResource("Resource_h4ord")
+params = SubResource("Resource_cfxoy")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(0.223239, 0.709819, 0.290166, 1)
+texture = ExtResource("3_no51s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.223529, 0.709804, 0.290196, 1)
+texture = ExtResource("4_lmr78")
+
+[node name="EventIcon" type="Sprite2D" parent="."]
+self_modulate = Color(0.0977035, 0.482155, 0.188067, 1)
+texture = ExtResource("5_ihwce")
+
+[node name="Shine" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_uk3w5")

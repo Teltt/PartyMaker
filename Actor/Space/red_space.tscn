@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://db0etj8h7ft7i"]
+
+[ext_resource type="Script" uid="uid://cqj7f1rfh4w6c" path="res://Actor/Space/Script/RedSpace.gd" id="2_t2gmq"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="3_6j03e"]
+[ext_resource type="Script" uid="uid://cb4b6uaqva8hs" path="res://Resource/Params/SpaceParams.gd" id="4_375nr"]
+[ext_resource type="PackedScene" uid="uid://kjpdui1jomus" path="res://Actor/Space/Helper/EditorSpaceCollision.tscn" id="4_xw6ie"]
+
+[sub_resource type="Resource" id="Resource_onpee"]
+script = ExtResource("3_6j03e")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("3_6j03e")
+
+[sub_resource type="Resource" id="Resource_dg7r2"]
+script = ExtResource("4_375nr")
+blue = false
+can_land = true
+must_go = false
+event_params = SubResource("Resource_onpee")
+metadata/_custom_type_script = ExtResource("4_375nr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6taub"]
+albedo_color = Color(0.694118, 0.133333, 0.152941, 1)
+metallic = 1.0
+
+[node name="RedSpace" type="Node3D"]
+script = ExtResource("2_t2gmq")
+space_params = SubResource("Resource_dg7r2")
+blue = false
+params = SubResource("Resource_onpee")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.182385, 0)
+radius = 1.0
+height = 0.364502
+material = SubResource("StandardMaterial3D_6taub")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.173229, 0)
+radius = 1.125
+height = 0.262695
+
+[node name="StaticBody3D" parent="." instance=ExtResource("4_xw6ie")]

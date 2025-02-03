@@ -1,0 +1,7 @@
+[gd_resource type="GradientTexture2D" load_steps=2 format=3 uid="uid://csmnobis6pvph"]
+
+[sub_resource type="Gradient" id="Gradient_6yhiv"]
+interpolation_color_space = 2
+
+[resource]
+gradient = SubResource("Gradient_6yhiv")

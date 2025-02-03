@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://db4affpnsgwy7"]
+
+[ext_resource type="Texture2D" uid="uid://bt6yaxsfd0li0" path="res://Resource/Graphics/Capsules/item/ItemShop.png" id="1_4lj6m"]
+[ext_resource type="Script" uid="uid://cblrkctpi0nxl" path="res://Scripts/Component/Visual/PlayerLayer.gd" id="2_a1k22"]
+
+[node name="CapsuleBase" type="Node3D"]
+
+[node name="Sprite2D" type="Sprite3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, -2.62268e-07, 6, 0, -6, -2.62268e-07, 0, 0.01, 0)
+cast_shadow = 0
+texture = ExtResource("1_4lj6m")
+
+[node name="PlayerLayer" type="Node" parent="."]
+script = ExtResource("2_a1k22")

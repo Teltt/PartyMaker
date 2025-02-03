@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://3hwn8g6bfmh6"]
+
+[ext_resource type="PackedScene" uid="uid://db4affpnsgwy7" path="res://Actor/Capsule/CapsuleBase.tscn" id="1_aoj4p"]
+[ext_resource type="Script" uid="uid://qwyfwjsh3g70" path="res://Actor/Capsule/Free_Coin.gd" id="1_upedv"]
+[ext_resource type="Script" uid="uid://csva6uwttkw5r" path="res://Resource/Params/CapsuleParams.gd" id="2_pe4l7"]
+[ext_resource type="Texture2D" uid="uid://doscryrpmbspt" path="res://Resource/Graphics/Capsules/free_coin/Free_Coin.atlastex" id="4_dnbnl"]
+
+[sub_resource type="Resource" id="Resource_dnbnl"]
+script = ExtResource("2_pe4l7")
+icon = ExtResource("4_dnbnl")
+price = 0
+space_attach = true
+attaches = true
+metadata/_custom_type_script = ExtResource("2_pe4l7")
+
+[node name="CapsuleBase" instance=ExtResource("1_aoj4p")]
+script = ExtResource("1_upedv")
+capsule_params = SubResource("Resource_dnbnl")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("4_dnbnl")

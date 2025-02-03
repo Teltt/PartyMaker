@@ -1,0 +1,14 @@
+# Godot 4+ specific ignores
+.godot/
+.git/
+.copyright/
+.CopyRight/
+.CopyRight/
+.copyRight/
+.Copyright/
+copyright/
+CopyRight/
+CopyRight/
+copyRight/
+Copyright/
+CopyRight.zip

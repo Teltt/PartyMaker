@@ -1,0 +1,161 @@
+[gd_scene load_steps=12 format=3 uid="uid://8p3x6rn65aib"]
+
+[ext_resource type="Script" uid="uid://c20k6kvcl88il" path="res://Actor/Capsule/CapsuleTheSoap.gd" id="1_3efw6"]
+[ext_resource type="PackedScene" uid="uid://db4affpnsgwy7" path="res://Actor/Capsule/CapsuleBase.tscn" id="1_8ji70"]
+[ext_resource type="Texture2D" uid="uid://j2x57yhi88nt" path="res://Resource/Graphics/Capsules/soap/Icon.png" id="1_868qc"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="2_ecdjc"]
+[ext_resource type="Texture2D" uid="uid://dq06q1murubsc" path="res://Resource/Graphics/Space/PassRing.png" id="2_lmgs0"]
+[ext_resource type="Script" uid="uid://csva6uwttkw5r" path="res://Resource/Params/CapsuleParams.gd" id="3_whcvj"]
+
+[sub_resource type="Resource" id="Resource_ydt2s"]
+script = ExtResource("2_ecdjc")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("2_ecdjc")
+
+[sub_resource type="Resource" id="Resource_8sbwi"]
+script = ExtResource("3_whcvj")
+icon = ExtResource("1_868qc")
+price = 8
+space_attach = true
+attaches = true
+event_params = SubResource("Resource_ydt2s")
+metadata/_custom_type_script = ExtResource("3_whcvj")
+
+[sub_resource type="Animation" id="Animation_83f66"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bubble1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bubble2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bubble4:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bubble3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pdpe0"]
+resource_name = "scrub"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bubble1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bubble2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bubble4:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bubble3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lv0u4"]
+_data = {
+&"RESET": SubResource("Animation_83f66"),
+&"scrub": SubResource("Animation_pdpe0")
+}
+
+[node name="CapsuleBase" instance=ExtResource("1_8ji70")]
+script = ExtResource("1_3efw6")
+capsule_params = SubResource("Resource_8sbwi")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("1_868qc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_lv0u4")
+}
+
+[node name="Bubble1" type="Sprite3D" parent="." index="3"]
+transform = Transform3D(0.59, 0, 0, 0, 0.59, 0, 0, 0, 0.59, -0.260709, 0.382377, -0.390496)
+texture = ExtResource("2_lmgs0")
+
+[node name="Bubble2" type="Sprite3D" parent="." index="4"]
+transform = Transform3D(0.79, 0, 0, 0, 0.79, 0, 0, 0, 0.79, 0.4564, 0.643167, -0.643472)
+texture = ExtResource("2_lmgs0")
+
+[node name="Bubble4" type="Sprite3D" parent="." index="5"]
+transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, -0.155438, 1.1688, 0)
+texture = ExtResource("2_lmgs0")
+
+[node name="Bubble3" type="Sprite3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59038, 1.35553, 0)
+texture = ExtResource("2_lmgs0")

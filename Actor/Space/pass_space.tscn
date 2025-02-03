@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://liiec6him5oe"]
+
+[ext_resource type="Script" uid="uid://cw2jkbhi6rn58" path="res://Actor/Space/Script/PassSpace.gd" id="2_1sfae"]
+[ext_resource type="Script" uid="uid://cb4b6uaqva8hs" path="res://Resource/Params/SpaceParams.gd" id="3_iw7i2"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="4_m4idv"]
+[ext_resource type="PackedScene" uid="uid://kjpdui1jomus" path="res://Actor/Space/Helper/EditorSpaceCollision.tscn" id="4_ybdfg"]
+
+[sub_resource type="Resource" id="Resource_j5sha"]
+script = ExtResource("4_m4idv")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("4_m4idv")
+
+[sub_resource type="Resource" id="Resource_4xygw"]
+script = ExtResource("3_iw7i2")
+blue = true
+can_land = false
+must_go = false
+event_params = SubResource("Resource_j5sha")
+metadata/_custom_type_script = ExtResource("3_iw7i2")
+
+[node name="PassSpace" type="Node3D"]
+script = ExtResource("2_1sfae")
+space_params = SubResource("Resource_4xygw")
+can_land = false
+params = SubResource("Resource_j5sha")
+
+[node name="StaticBody3D" parent="." instance=ExtResource("4_ybdfg")]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.173229, 0)
+radius = 1.125
+height = 0.262695
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.182385, 0)
+operation = 2
+radius = 1.0
+height = 0.364502

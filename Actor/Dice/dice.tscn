@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdr7fc50tkk6i"]
+
+[ext_resource type="Script" uid="uid://bar12te4bx4bq" path="res://Actor/Dice/dice.gd" id="1_55kmt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ho8wu"]
+
+[node name="Dice" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_ho8wu")
+script = ExtResource("1_55kmt")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51)
+pixel_size = 0.023
+text = "10"

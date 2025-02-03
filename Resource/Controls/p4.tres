@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PlayerControl" load_steps=2 format=3 uid="uid://b2ref01urgdve"]
+
+[ext_resource type="Script" uid="uid://bqp8pwvjwcehl" path="res://Scripts/Component/Party/PlayerControl.gd" id="1_x4oon"]
+
+[resource]
+script = ExtResource("1_x4oon")
+player = "p4"
+up = "_up"
+down = "_down"
+left = "_left"
+right = "_right"
+a = "_a"
+b = "_b"
+x = "_x"
+y = "_y"
+l = "_l"
+r = "_r"
+zl = "_zl"
+zr = "_zr"

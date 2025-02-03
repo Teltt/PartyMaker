@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn8mch5o76kla"]
+
+[ext_resource type="Script" uid="uid://5b5k6iwvpk86" path="res://Actor/Event/TurnTypes/car_party.gd" id="1_w408p"]
+
+[node name="CarParty" type="Node3D"]
+script = ExtResource("1_w408p")
+
+[node name="Car" type="CSGCombiner3D" parent="."]
+
+[node name="Drivers" type="Node3D" parent="Car"]
+
+[node name="Model" type="CSGSphere3D" parent="Car"]
+radius = 2.0
+
+[node name="Node3D" type="Node3D" parent="Car/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33015, 0)
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Car/Model/Node3D"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -2.33015, -1)
+height = 4.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Car/Model/Node3D/CSGCylinder3D4"]
+operation = 2
+height = 3.0
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Car/Model/Node3D"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -2.33015, 1)
+height = 4.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Car/Model/Node3D/CSGCylinder3D3"]
+operation = 2
+height = 3.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Car/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09569, 0)
+operation = 2
+radius = 1.43359
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Car/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33015, 0)
+operation = 2
+radius = 2.13672
+height = 1.24365

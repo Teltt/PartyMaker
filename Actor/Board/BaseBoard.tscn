@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://bet5igb4qhudb"]
+
+[ext_resource type="Script" uid="uid://daqsiqo0yw8as" path="res://Scripts/Component/Editor/BoardEditor.gd" id="1_e65v7"]
+[ext_resource type="PackedScene" uid="uid://c3nrwo1gf7s6v" path="res://Actor/Player/player.tscn" id="5_rweru"]
+[ext_resource type="Resource" uid="uid://jg51ve4jff65" path="res://Resource/Controls/p2.tres" id="7_cly83"]
+[ext_resource type="Resource" uid="uid://dp8pjdspfyx8o" path="res://Resource/Controls/p3.tres" id="10_16yqc"]
+[ext_resource type="Resource" uid="uid://b2ref01urgdve" path="res://Resource/Controls/p4.tres" id="11_c47t2"]
+[ext_resource type="AudioStream" uid="uid://6cqsy8phf2y3" path="res://CopyRight/Audio/Dice Roll SMP.ogg" id="21_56okp"]
+[ext_resource type="AudioStream" uid="uid://dnbjpsiqflso8" path="res://CopyRight/Audio/Ready Start MP2.ogg" id="23_5uksb"]
+
+[node name="Board" type="Node3D"]
+script = ExtResource("1_e65v7")
+
+[node name="Editor" type="Node3D" parent="."]
+
+[node name="Spaces" type="Node3D" parent="."]
+
+[node name="Capsules" type="Node3D" parent="."]
+
+[node name="Player1" type="Node3D" parent="Capsules"]
+
+[node name="Player2" type="Node3D" parent="Capsules"]
+
+[node name="Player3" type="Node3D" parent="Capsules"]
+
+[node name="Player4" type="Node3D" parent="Capsules"]
+
+[node name="Player5" type="Node3D" parent="Capsules"]
+
+[node name="Events" type="Node3D" parent="."]
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="Player" parent="Players" instance=ExtResource("5_rweru")]
+
+[node name="Player2" parent="Players" instance=ExtResource("5_rweru")]
+player_id = 1
+controls = ExtResource("7_cly83")
+
+[node name="Player3" parent="Players" instance=ExtResource("5_rweru")]
+player_id = 2
+controls = ExtResource("10_16yqc")
+
+[node name="Player4" parent="Players" instance=ExtResource("5_rweru")]
+player_id = 3
+controls = ExtResource("11_c47t2")
+
+[node name="DummyPlayer" parent="." groups=["Dummy"] instance=ExtResource("5_rweru")]
+visible = false
+player_id = 4
+controls = null
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="DiceRoll" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("21_56okp")
+volume_db = 3.0
+
+[node name="ReadyStart" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("23_5uksb")
+volume_db = 3.0

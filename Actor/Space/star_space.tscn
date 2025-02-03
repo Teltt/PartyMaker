@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=3 uid="uid://bljsrqva7y8wg"]
+
+[ext_resource type="Script" uid="uid://d2elopb1dw0a2" path="res://Actor/Space/Script/StarBlueSpace.gd" id="1_y3buo"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="2_pheew"]
+[ext_resource type="Script" uid="uid://cb4b6uaqva8hs" path="res://Resource/Params/SpaceParams.gd" id="3_fvbns"]
+[ext_resource type="PackedScene" uid="uid://kjpdui1jomus" path="res://Actor/Space/Helper/EditorSpaceCollision.tscn" id="4_5o7yc"]
+
+[sub_resource type="Resource" id="Resource_01n5c"]
+script = ExtResource("2_pheew")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("2_pheew")
+
+[sub_resource type="Resource" id="Resource_5o7yc"]
+script = ExtResource("3_fvbns")
+blue = true
+can_land = false
+must_go = false
+event_params = SubResource("Resource_01n5c")
+metadata/_custom_type_script = ExtResource("3_fvbns")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nncb8"]
+albedo_color = Color(0.105882, 0.196078, 0.698039, 1)
+metallic = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wkoe1"]
+albedo_color = Color(1, 0.797, 0.13, 1)
+metallic = 1.0
+
+[node name="StarSpace" type="Node3D"]
+script = ExtResource("1_y3buo")
+space_params = SubResource("Resource_5o7yc")
+can_land = false
+params = SubResource("Resource_01n5c")
+
+[node name="StaticBody3D" parent="." instance=ExtResource("4_5o7yc")]
+
+[node name="Space" type="CSGCombiner3D" parent="."]
+visible = false
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Space"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.173229, 0)
+radius = 1.125
+height = 0.262695
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Space"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.182385, 0)
+radius = 1.0
+height = 0.364502
+material = SubResource("StandardMaterial3D_nncb8")
+
+[node name="StarSpace" type="CSGCombiner3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="StarSpace"]
+transform = Transform3D(1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, 1, 0, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="StarSpace/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.625, 0.5, -0.182, 0)
+radius = 1.0
+height = 0.364502
+sides = 3
+material = SubResource("StandardMaterial3D_wkoe1")
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="StarSpace"]
+transform = Transform3D(0.309017, 0, 0.951057, 0, 1, 0, -0.951057, 0, 0.309017, 0, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="StarSpace/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.625, 0.5, -0.182, 0)
+radius = 1.0
+height = 0.364502
+sides = 3
+material = SubResource("StandardMaterial3D_wkoe1")
+
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="StarSpace"]
+transform = Transform3D(-0.809017, 0, 0.587785, 0, 1, 0, -0.587785, 0, -0.809017, 0, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="StarSpace/CSGCombiner3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.625, 0.5, -0.182, 0)
+radius = 1.0
+height = 0.364502
+sides = 3
+material = SubResource("StandardMaterial3D_wkoe1")
+
+[node name="CSGCombiner3D4" type="CSGCombiner3D" parent="StarSpace"]
+transform = Transform3D(-0.809017, 0, -0.587786, 0, 1, 0, 0.587786, 0, -0.809017, 0, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="StarSpace/CSGCombiner3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.625, 0.5, -0.182, 0)
+radius = 1.0
+height = 0.364502
+sides = 3
+material = SubResource("StandardMaterial3D_wkoe1")
+
+[node name="CSGCombiner3D5" type="CSGCombiner3D" parent="StarSpace"]
+transform = Transform3D(0.309017, 0, -0.951056, 0, 1, 0, 0.951056, 0, 0.309017, 0, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="StarSpace/CSGCombiner3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.625, 0.5, -0.182, 0)
+radius = 1.0
+height = 0.364502
+sides = 3
+material = SubResource("StandardMaterial3D_wkoe1")

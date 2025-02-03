@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://baockq57m6w4t"]
+
+[ext_resource type="Script" uid="uid://cxe4p85ga6o61" path="res://Actor/Capsule/CapsuleSmallMush.gd" id="1_gqwnm"]
+[ext_resource type="PackedScene" uid="uid://db4affpnsgwy7" path="res://Actor/Capsule/CapsuleBase.tscn" id="1_gyn81"]
+[ext_resource type="Texture2D" uid="uid://0nb5ilkksje7" path="res://Resource/Graphics/Capsules/s_mush/icon.png" id="1_lj2yg"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="2_2lfyc"]
+[ext_resource type="Script" uid="uid://csva6uwttkw5r" path="res://Resource/Params/CapsuleParams.gd" id="3_ide4n"]
+[ext_resource type="PackedScene" uid="uid://cdr7fc50tkk6i" path="res://Actor/Dice/dice.tscn" id="6_gkr21"]
+
+[sub_resource type="Resource" id="Resource_55p1v"]
+script = ExtResource("2_2lfyc")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("2_2lfyc")
+
+[sub_resource type="Resource" id="Resource_hhtv2"]
+script = ExtResource("3_ide4n")
+icon = ExtResource("1_lj2yg")
+price = 4
+space_attach = false
+attaches = false
+event_params = SubResource("Resource_55p1v")
+metadata/_custom_type_script = ExtResource("3_ide4n")
+
+[node name="CapsuleBase" instance=ExtResource("1_gyn81")]
+script = ExtResource("1_gqwnm")
+capsule_params = SubResource("Resource_hhtv2")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("1_lj2yg")
+
+[node name="PlayerLayer" parent="." index="1" node_paths=PackedStringArray("visual_instances")]
+visual_instances = [NodePath("../Sprite2D"), NodePath("../Dice")]
+
+[node name="Dice" parent="." index="2" instance=ExtResource("6_gkr21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)

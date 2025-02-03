@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://o6fl0gr5d4ck"]
+
+[ext_resource type="Script" path="res://Scripts/Component/Amount_Mgr/amount_mgr.gd" id="1_7i63i"]
+
+[node name="AmountMgr" type="Node"]
+script = ExtResource("1_7i63i")

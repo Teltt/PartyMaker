@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmqf2junx1rxc"]
+
+[ext_resource type="Script" uid="uid://b1r7oe4yk8n2w" path="res://Actor/Capsule/CapsuleGoomba.gd" id="1_pv0il"]
+[ext_resource type="PackedScene" uid="uid://db4affpnsgwy7" path="res://Actor/Capsule/CapsuleBase.tscn" id="1_vqqqb"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="2_3np8m"]
+[ext_resource type="Texture2D" uid="uid://bshrq8fmj4whc" path="res://Resource/Graphics/Capsules/goomba/new_icon.png" id="2_vqimm"]
+[ext_resource type="Script" uid="uid://csva6uwttkw5r" path="res://Resource/Params/CapsuleParams.gd" id="3_lsk1n"]
+
+[sub_resource type="Resource" id="Resource_55p1v"]
+script = ExtResource("2_3np8m")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("2_3np8m")
+
+[sub_resource type="Resource" id="Resource_hwsls"]
+script = ExtResource("3_lsk1n")
+icon = ExtResource("2_vqimm")
+price = 8
+space_attach = true
+attaches = true
+event_params = SubResource("Resource_55p1v")
+metadata/_custom_type_script = ExtResource("3_lsk1n")
+
+[node name="CapsuleBase" instance=ExtResource("1_vqqqb")]
+script = ExtResource("1_pv0il")
+capsule_params = SubResource("Resource_hwsls")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_vqimm")
+
+[node name="Bank" type="Label3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+pixel_size = 0.023

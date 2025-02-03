@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://drt4bmw663eu5"]
+
+[ext_resource type="PackedScene" uid="uid://db4affpnsgwy7" path="res://Actor/Capsule/CapsuleBase.tscn" id="1_8d6ec"]
+[ext_resource type="Script" uid="uid://bt41dewd2esoy" path="res://Actor/Capsule/CapsuleWhomp.gd" id="1_xyg0w"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="2_es6iw"]
+[ext_resource type="Texture2D" uid="uid://m5nxtra2bo32" path="res://Resource/Graphics/Capsules/whomp/icon.png" id="2_nsg8k"]
+[ext_resource type="Script" uid="uid://csva6uwttkw5r" path="res://Resource/Params/CapsuleParams.gd" id="3_lykgu"]
+
+[sub_resource type="Resource" id="Resource_e6drk"]
+script = ExtResource("2_es6iw")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("2_es6iw")
+
+[sub_resource type="Resource" id="Resource_ucq4b"]
+script = ExtResource("3_lykgu")
+icon = ExtResource("2_nsg8k")
+price = 8
+space_attach = true
+attaches = true
+event_params = SubResource("Resource_e6drk")
+metadata/_custom_type_script = ExtResource("3_lykgu")
+
+[sub_resource type="BoxMesh" id="BoxMesh_osaso"]
+
+[node name="CapsuleBase" instance=ExtResource("1_8d6ec")]
+script = ExtResource("1_xyg0w")
+capsule_params = SubResource("Resource_ucq4b")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_nsg8k")
+
+[node name="Whomp" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.667, 0)
+mesh = SubResource("BoxMesh_osaso")

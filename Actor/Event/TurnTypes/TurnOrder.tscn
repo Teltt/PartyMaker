@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv5p3klgi78ln"]
+
+[ext_resource type="Script" uid="uid://dqiq7rfvgv6m1" path="res://Actor/Event/TurnTypes/TurnOrder.gd" id="1_8axjo"]
+[ext_resource type="PackedScene" uid="uid://cdr7fc50tkk6i" path="res://Actor/Dice/dice.tscn" id="2_3anh2"]
+
+[node name="TurnOrder" type="Node3D" node_paths=PackedStringArray("cam_target")]
+script = ExtResource("1_8axjo")
+cam_target = NodePath("Node3D")
+dice = Array[NodePath]([NodePath("Node3D/Dice1"), NodePath("Node3D/Dice2"), NodePath("Node3D/Dice3"), NodePath("Node3D/Dice4")])
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.962213, 0.272297, 0, -0.272297, 0.962213, 0, 8.681, 0)
+
+[node name="Dice1" parent="Node3D" instance=ExtResource("2_3anh2")]
+transform = Transform3D(1, 0, 0, 0, 0.962213, -0.272297, 0, 0.272297, 0.962213, -2.32013, 0.708868, -4.39907)
+
+[node name="Dice2" parent="Node3D" instance=ExtResource("2_3anh2")]
+transform = Transform3D(1, 0, 0, 0, 0.962213, -0.272297, 0, 0.272297, 0.962213, -0.820133, 0.708868, -4.39907)
+
+[node name="Dice3" parent="Node3D" instance=ExtResource("2_3anh2")]
+transform = Transform3D(1, 0, 0, 0, 0.962213, -0.272297, 0, 0.272297, 0.962213, 0.679867, 0.708867, -4.39907)
+
+[node name="Dice4" parent="Node3D" instance=ExtResource("2_3anh2")]
+transform = Transform3D(1, 0, 0, 0, 0.962213, -0.272297, 0, 0.272297, 0.962213, 2.18, 0.708867, -4.39907)

@@ -1,0 +1,15 @@
+extends Resource
+class_name PlayerControl
+@export var player = "p1"
+@export var up = "_up"
+@export var down = "_down"
+@export var left = "_left"
+@export var right= "_right"
+@export var a = "_a"
+@export var b = "_b"
+@export var x = "_x"
+@export var y = "_y"
+@export var l = "_l"
+@export var r = "_r"
+@export var zl = "_zl"
+@export var zr = "_zr"

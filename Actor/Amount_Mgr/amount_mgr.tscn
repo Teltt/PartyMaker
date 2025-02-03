@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct0e3w7637tj7"]
+
+[ext_resource type="Script" uid="uid://buuw7jd6xx6hf" path="res://Scripts/Component/Amount_Mgr/amount_mgr.gd" id="1_byofm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xntct"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_0daqu"]
+transform_format = 1
+
+[node name="Coins" type="Node3D"]
+script = ExtResource("1_byofm")
+mesh = SubResource("BoxMesh_xntct")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_0daqu")

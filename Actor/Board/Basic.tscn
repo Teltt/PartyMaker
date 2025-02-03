@@ -1,0 +1,288 @@
+[gd_scene load_steps=19 format=3 uid="uid://c7w7oqvfuvb2g"]
+
+[ext_resource type="PackedScene" uid="uid://bet5igb4qhudb" path="res://Actor/Board/BaseBoard.tscn" id="1_e7sl0"]
+[ext_resource type="PackedScene" uid="uid://lfdnp8ve02fh" path="res://Actor/Space/blue_space.tscn" id="2_y65y2"]
+[ext_resource type="PackedScene" uid="uid://db0etj8h7ft7i" path="res://Actor/Space/red_space.tscn" id="3_x7j4v"]
+[ext_resource type="PackedScene" uid="uid://dbwpg175aptii" path="res://Actor/Space/OperationSpace.tscn" id="4_2lgaa"]
+[ext_resource type="PackedScene" uid="uid://b6y4xo3fj41v6" path="res://Actor/Space/blue_pass_space.tscn" id="5_hahcn"]
+[ext_resource type="PackedScene" uid="uid://dy4p48b3t5sdg" path="res://Actor/Space/item_space.tscn" id="6_5mcjd"]
+[ext_resource type="PackedScene" uid="uid://dmqf2junx1rxc" path="res://Actor/Capsule/GoombaCapsule.tscn" id="7_pcos7"]
+[ext_resource type="PackedScene" uid="uid://baockq57m6w4t" path="res://Actor/Capsule/SmallMushCapsule.tscn" id="8_scqrd"]
+[ext_resource type="PackedScene" uid="uid://dxobvgnj53s7d" path="res://Actor/Capsule/SniperCapsule.tscn" id="9_gkmja"]
+[ext_resource type="PackedScene" uid="uid://8p3x6rn65aib" path="res://Actor/Capsule/TheSoapCapsule.tscn" id="10_56c46"]
+[ext_resource type="PackedScene" uid="uid://drt4bmw663eu5" path="res://Actor/Capsule/whomp_capsule.tscn" id="11_dpkwv"]
+[ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="12_k0c1q"]
+[ext_resource type="PackedScene" uid="uid://bljsrqva7y8wg" path="res://Actor/Space/star_space.tscn" id="13_txktm"]
+
+[sub_resource type="Resource" id="Resource_ur8vp"]
+script = ExtResource("12_k0c1q")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("12_k0c1q")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_857ne"]
+albedo_color = Color(0.2484, 0.2484, 0.2484, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e7sl0"]
+sky_horizon_color = Color(0.945098, 1, 1, 1)
+sky_curve = 0.252269
+sky_energy_multiplier = 1.45
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_p1l4o"]
+sky_material = SubResource("ProceduralSkyMaterial_e7sl0")
+
+[sub_resource type="Environment" id="Environment_y65y2"]
+background_mode = 2
+sky = SubResource("Sky_p1l4o")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Board" instance=ExtResource("1_e7sl0")]
+edit_mode_on = true
+
+[node name="BlueSpace" parent="Spaces" index="0" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6522, 5.36464, 11.071)
+next_space = [NodePath("../BlueSpace2")]
+previous_space = [NodePath("../BlueSpace4")]
+
+[node name="BlueSpace2" parent="Spaces" index="1" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7798, 5.36464, 6.78892)
+next_space = [NodePath("../BlueSpace3")]
+previous_space = [NodePath("../BlueSpace"), NodePath("../BlueSpace7")]
+
+[node name="BlueSpace3" parent="Spaces" index="2" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.647, 5.36464, 2.53248)
+next_space = [NodePath("../RedSpace")]
+previous_space = [NodePath("../BlueSpace2")]
+
+[node name="RedSpace" parent="Spaces" index="3" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("3_x7j4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6413, 5.36464, -1.8986)
+next_space = [NodePath("../OperationSpace"), NodePath("../BlueSpace18")]
+previous_space = [NodePath("../BlueSpace3")]
+
+[node name="BlueSpace4" parent="Spaces" index="4" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.653, 5.36464, 15.3776)
+next_space = [NodePath("../BlueSpace")]
+previous_space = [NodePath("../StarSpace")]
+
+[node name="BlueSpace5" parent="Spaces" index="5" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72661, 5.36463, 2.34441)
+next_space = [NodePath("../StarSpace2")]
+previous_space = [NodePath("../BlueSpace6")]
+
+[node name="BlueSpace6" parent="Spaces" index="6" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.04546, 5.36464, -1.84576)
+next_space = [NodePath("../BlueSpace5")]
+previous_space = [NodePath("../OperationSpace")]
+
+[node name="OperationSpace" parent="Spaces" index="7" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("4_2lgaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.62485, 5.36464, -1.98809)
+next_space = [NodePath("../BlueSpace6")]
+previous_space = [NodePath("../RedSpace")]
+
+[node name="BlueSpace7" parent="Spaces" index="8" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.47272, 5.36464, 6.75534)
+next_space = [NodePath("../BlueSpace2")]
+previous_space = [NodePath("../StarSpace2")]
+
+[node name="RedSpace2" parent="Spaces" index="9" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("3_x7j4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.02241, 5.36464, 15.4638)
+next_space = [NodePath("../StarSpace")]
+previous_space = [NodePath("../BlueSpace8")]
+
+[node name="BlueSpace8" parent="Spaces" index="10" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.303045, 5.36464, 15.3153)
+next_space = [NodePath("../RedSpace2")]
+previous_space = [NodePath("../BlueSpace9")]
+
+[node name="BlueSpace9" parent="Spaces" index="11" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.39534, 5.36464, 15.3032)
+next_space = [NodePath("../BlueSpace8")]
+previous_space = [NodePath("../BlueSpace10")]
+
+[node name="BlueSpace10" parent="Spaces" index="12" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.85965, 5.36464, 15.4674)
+next_space = [NodePath("../BlueSpace9")]
+previous_space = [NodePath("../BlueSpace11")]
+
+[node name="RedSpace3" parent="Spaces" index="13" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("3_x7j4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.19251, 5.36464, 2.51325)
+next_space = [NodePath("../StarSpace3")]
+previous_space = [NodePath("../BlueSpace12")]
+
+[node name="OperationSpace2" parent="Spaces" index="14" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("4_2lgaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1689, 5.36464, 2.4412)
+next_space = [NodePath("../RedSpace4")]
+previous_space = [NodePath("../BlueSpace19")]
+
+[node name="BluePassSpace" parent="Spaces" index="15" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("5_hahcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65772, 5.36463, 7.12223)
+next_space = [NodePath("../BlueSpace11")]
+previous_space = [NodePath("../RedSpace4"), NodePath("../StarSpace3")]
+
+[node name="BlueSpace11" parent="Spaces" index="16" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.51975, 5.36463, 11.4032)
+next_space = [NodePath("../BlueSpace10")]
+previous_space = [NodePath("../BluePassSpace")]
+
+[node name="RedSpace4" parent="Spaces" index="17" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("3_x7j4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2274, 5.36463, 6.69221)
+next_space = [NodePath("../BluePassSpace")]
+previous_space = [NodePath("../OperationSpace2")]
+
+[node name="ItemSpace" parent="Spaces" index="18" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("6_5mcjd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.92693, 5.36464, -1.87549)
+capsule_giveaway = Array[PackedScene]([ExtResource("7_pcos7"), ExtResource("8_scqrd"), ExtResource("9_gkmja"), ExtResource("10_56c46"), ExtResource("11_dpkwv")])
+next_space = [NodePath("../BlueSpace19"), NodePath("../BlueSpace12")]
+previous_space = [NodePath("../BlueSpace13")]
+params = SubResource("Resource_ur8vp")
+
+[node name="BlueSpace12" parent="Spaces" index="19" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.19244, 5.36463, -1.83207)
+next_space = [NodePath("../RedSpace3")]
+previous_space = [NodePath("../ItemSpace")]
+
+[node name="BlueSpace13" parent="Spaces" index="20" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.29869, 5.36464, -6.15023)
+next_space = [NodePath("../ItemSpace")]
+previous_space = [NodePath("../BlueSpace14")]
+
+[node name="BlueSpace14" parent="Spaces" index="21" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.05371, 5.36464, -9.75546)
+next_space = [NodePath("../BlueSpace13")]
+previous_space = [NodePath("../BlueSpace15")]
+
+[node name="BlueSpace15" parent="Spaces" index="22" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8526, 5.36464, -9.86258)
+next_space = [NodePath("../BlueSpace14")]
+previous_space = [NodePath("../RedSpace5")]
+
+[node name="RedSpace5" parent="Spaces" index="23" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("3_x7j4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09146, 5.36464, -9.94343)
+next_space = [NodePath("../BlueSpace15")]
+previous_space = [NodePath("../BlueSpace16")]
+
+[node name="BlueSpace16" parent="Spaces" index="24" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.53958, 5.36464, -10.1743)
+next_space = [NodePath("../RedSpace5")]
+previous_space = [NodePath("../OperationSpace3")]
+
+[node name="OperationSpace3" parent="Spaces" index="25" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("4_2lgaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.86271, 5.36464, -10.1617)
+next_space = [NodePath("../BlueSpace16")]
+previous_space = [NodePath("../BlueSpace17")]
+
+[node name="BlueSpace17" parent="Spaces" index="26" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3649, 5.36464, -9.87622)
+next_space = [NodePath("../OperationSpace3")]
+previous_space = [NodePath("../BlueSpace18")]
+
+[node name="BlueSpace18" parent="Spaces" index="27" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6191, 5.36464, -6.14502)
+next_space = [NodePath("../BlueSpace17")]
+previous_space = [NodePath("../RedSpace")]
+
+[node name="StarSpace" parent="Spaces" index="28" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("13_txktm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.21095, 5.36464, 15.3404)
+star_space_siblings = Array[NodePath]([NodePath("../StarSpace2"), NodePath("../StarSpace3")])
+next_space = [NodePath("../BlueSpace4")]
+previous_space = [NodePath("../RedSpace2")]
+
+[node name="StarSpace2" parent="Spaces" index="29" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("13_txktm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.70117, 5.36464, 6.59194)
+hosting_star = false
+star_space_siblings = Array[NodePath]([NodePath("../StarSpace"), NodePath("../StarSpace3")])
+next_space = [NodePath("../BlueSpace7")]
+previous_space = [NodePath("../BlueSpace5")]
+
+[node name="StarSpace3" parent="Spaces" index="30" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("13_txktm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23218, 5.36464, 6.79414)
+hosting_star = false
+star_space_siblings = Array[NodePath]([NodePath("../StarSpace"), NodePath("../StarSpace2")])
+next_space = [NodePath("../BluePassSpace")]
+previous_space = [NodePath("../RedSpace3")]
+
+[node name="BlueSpace19" parent="Spaces" index="31" node_paths=PackedStringArray("next_space", "previous_space") instance=ExtResource("2_y65y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0049, 5.36463, -1.94456)
+next_space = [NodePath("../OperationSpace2")]
+previous_space = [NodePath("../ItemSpace")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects" index="0"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -2.5, 0)
+use_collision = true
+size = Vector3(9, 1, 9)
+material = SubResource("StandardMaterial3D_857ne")
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Objects/CSGBox3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -2)
+size = Vector3(4, 1, 0.5)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Objects/CSGBox3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 1, -0.4)
+size = Vector3(2, 1, 0.5)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Objects/CSGBox3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 1, 1.4)
+size = Vector3(2, 1, 0.5)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Objects/CSGBox3D" index="3"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.34292, 1, 2.2)
+size = Vector3(2, 1, 0.5)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Objects/CSGBox3D" index="4"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.25, 1, -1.25)
+size = Vector3(2, 1, 0.5)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Objects/CSGBox3D" index="5"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.55, 1, 0.54043)
+size = Vector3(5.61914, 1, 0.5)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Objects/CSGBox3D" index="6"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.45, 1, 0.500123)
+size = Vector3(2.3, 1, 0.5)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Objects/CSGBox3D" index="7"]
+transform = Transform3D(1, 0, -2.84217e-15, 0, 1, 0, 2.84217e-15, 0, 1, 0.605664, 1, 3.10012)
+size = Vector3(4.38867, 1, 0.5)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Objects/CSGBox3D" index="8"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.05, 1, 0.35)
+size = Vector3(2, 1, 0.5)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Objects/CSGBox3D" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7076, 1, -0.4)
+size = Vector3(2, 1, 0.5)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Objects/CSGBox3D" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7076, 1, 1.4)
+size = Vector3(2, 1, 0.5)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Objects/CSGBox3D" index="11"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.5576, 1, 0.500123)
+size = Vector3(2.3, 1, 0.5)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Objects/CSGBox3D" index="12"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.957599, 1, 0.35)
+size = Vector3(2, 1, 0.5)
+
+[node name="Player" parent="Players" index="0" node_paths=PackedStringArray("initial_space")]
+initial_space = NodePath("../../Spaces/BlueSpace")
+
+[node name="Player2" parent="Players" index="1" node_paths=PackedStringArray("initial_space")]
+initial_space = NodePath("../../Spaces/BlueSpace")
+
+[node name="Player3" parent="Players" index="2" node_paths=PackedStringArray("initial_space")]
+initial_space = NodePath("../../Spaces/BlueSpace")
+
+[node name="Player4" parent="Players" index="3" node_paths=PackedStringArray("initial_space")]
+initial_space = NodePath("../../Spaces/BlueSpace")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="8"]
+environment = SubResource("Environment_y65y2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="9"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
