@@ -46,12 +46,13 @@ func update_space(delta):
 func on_turn_start():
 	var p:Player= turn_order.get_cur()
 	if p in players:
+		await get_tree().create_timer(1.25).timeout
 		await Define.outer_party.focus_on_viewport(p.player_id)
 		p.board_control_allowed = true
 func on_turn_end():
 	update_space(0)
 	var p:Player= turn_order.get_cur()
 	if p in players:
+		p.board_control_allowed = false
 		await Define.outer_party.finish_focusing()
 		await get_tree().create_timer(1.25).timeout
-		p.board_control_allowed = false

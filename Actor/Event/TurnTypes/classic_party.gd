@@ -1,9 +1,7 @@
 extends Node
-@export var turn_order_path:NodePath
-var turn_order:TurnOrder
+@export var turn_order:TurnOrder
 
 func _ready() -> void:
-	turn_order = get_node(turn_order_path)
 	turn_order.start_sig.connect(on_turn_start)
 	turn_order.end_sig.connect(on_turn_end)
 var awaiting = false
@@ -15,11 +13,12 @@ func _process(delta: float) -> void:
 			turn_order.end_turn()
 func on_turn_start():
 	var p:Player= turn_order.get_cur()
+	await get_tree().create_timer(1.25).timeout
 	await Define.outer_party.focus_on_viewport(p.player_id)
 	p.board_control_allowed = true
 	
 func on_turn_end():
-	await Define.outer_party.finish_focusing()
-	await get_tree().create_timer(1.25).timeout
 	var p:Player= turn_order.get_cur()
 	p.board_control_allowed = false
+	await Define.outer_party.finish_focusing()
+	await get_tree().create_timer(1.25).timeout

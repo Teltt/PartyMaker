@@ -1,30 +1,46 @@
 extends Node3D
 class_name Player
-
+## The Id of this player, useful for accessing in arrays
 @export_range(0,4) var player_id = 0
+## unused
 @export_storage var sprite_id: int = -1
+## is this player human
 @export var cpu_controlled = true
+## the input action strings
 @export var controls :PlayerControl
+## this controls how the player travels around the board
 @export var travel:Travel
+##variable for fine turning controls during events 
 @export_storage var can_travel = true
+##variable for fine turning controls during events 
 @export_storage var can_start_travel = true
 var camera :Camera3D = null
+##Where the player's camera goes to
 @onready var cam_target:Node3D = $Marker3D/CamTarget
+## the player color
 @export_storage var color:Color
 @export_storage var capsule_color:Color
+##the initial starting space
 @export var initial_space: Space = null
 @export_storage var joystick_pos: Vector2 = Vector2.ZERO
+##variable for fine turning controls during events 
 @export_storage var board_control_allowed = true
+##variable for fine turning controls during events 
 @export_storage var auto_move_camera = true
+##is the player viewing the map
 @export_storage var map_mode = false
 @export_storage var spaces_rolled: int = 0
+##has the player rolled
 @export_storage var rolled_ready: bool = false
 
+#Tracks the player's coins
 @onready var coin_mgr:Amount_MGR = $Coins
+#Tracks the player's stars
 @onready var star_mgr:Amount_MGR = $Stars
 var capsule_mgr: CapsuleMgr:
 	get:
 		return $CapsuleMgr
+##CPU player controller
 @export var cpu_mgr: CPUMGR = CPUMGR.new()
 func _ready() -> void:
 	cpu_mgr.player = self
@@ -162,7 +178,7 @@ func handle_input(delta:float):
 func check_section(section:Party.Section):
 	return Define.party.party_section == section
 func is_ready_to_end():
-	return not (not travel.landed or coin_mgr.active or star_mgr.active)
+	return not (not travel.landed or coin_mgr.active or star_mgr.active) and not Define.party.is_waiting()
 func can_tick():
 	var party = Define.party
 	var s = self
@@ -194,8 +210,11 @@ func wait_for_event_func(event:Event,callable:Callable,args:Array):
 	waiting.erase(nam)
 	event_queue.erase(event)
 	return ret
+	
+##activates events the most important function
 func activate(cond:int,event:Event):
 	return await Event.activate_event_chain(self,cond,event)
+## is waiting for an event to finish
 func is_waiting():
 	return waiting.keys().size() > 0
 func get_angle_cw_dif(a1: float, a2: float) -> float:
@@ -208,7 +227,6 @@ func get_angle_smallest_dif(a1: float, a2: float) -> float:
 	var smallest_dif =  PI - abs(abs(normalize_angle(a1) - normalize_angle(a2)) - PI)
 	var cw_dif = normalize_angle(get_angle_cw_dif(a1, a2))
 	var ccw_dif = normalize_angle(PI * 2 - cw_dif)
-	
 	if abs(cw_dif) <= abs(ccw_dif):
 		return cw_dif
 	else:

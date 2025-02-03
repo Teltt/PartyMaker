@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c3nrwo1gf7s6v"]
+[gd_scene load_steps=20 format=3 uid="uid://c3nrwo1gf7s6v"]
 
 [ext_resource type="Script" uid="uid://ty5pjtva6r22" path="res://Actor/Player/Player.gd" id="1_0daqu"]
 [ext_resource type="Resource" uid="uid://b5l2x2doviwbh" path="res://Resource/Controls/p1.tres" id="2_06fww"]
@@ -13,12 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://ddh4fjhtkahs6" path="res://Resource/Graphics/StarSpace.png" id="13_iuy7w"]
 [ext_resource type="Texture2D" uid="uid://c125n5y4ahnkj" path="res://Resource/Graphics/RedSpace.png" id="13_van2h"]
 [ext_resource type="Texture2D" uid="uid://bokjeh2f0io4t" path="res://Resource/Graphics/Coin.png" id="14_40iew"]
-[ext_resource type="AudioStream" uid="uid://v7b8efnyj85y" path="res://CopyRight/Audio/Dice Pop SMP.ogg" id="14_iuy7w"]
 [ext_resource type="Script" uid="uid://djd0apf52p7ge" path="res://Actor/Player/capsuledrawer.gd" id="16_ab7l3"]
-[ext_resource type="AudioStream" uid="uid://brenltm3a1yrb" path="res://CopyRight/Audio/Coin.WAV" id="16_agtul"]
 [ext_resource type="Script" uid="uid://c72e1yx5ky1yb" path="res://Actor/Player/travel.gd" id="16_van2h"]
-[ext_resource type="AudioStream" uid="uid://xc15o2vtc2t5" path="res://CopyRight/Audio/Pass Space MPS.ogg" id="17_55p1v"]
-[ext_resource type="AudioStream" uid="uid://dvm8ym4j8moje" path="res://CopyRight/Audio/LandSpace.ogg" id="18_nifj2"]
 
 [sub_resource type="Shader" id="Shader_iuy7w"]
 code = "shader_type spatial;
@@ -234,22 +230,18 @@ land_sfx = NodePath("../SFX/LandSpace")
 [node name="SFX" type="Node" parent="."]
 
 [node name="DicePop" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("14_iuy7w")
 volume_db = -7.0
 max_polyphony = 3
 
 [node name="Coin" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("16_agtul")
 volume_db = 1.0
 
 [node name="PassSpace" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("17_55p1v")
 volume_db = -7.0
 pitch_scale = 1.25
 max_polyphony = 4
 
 [node name="LandSpace" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("18_nifj2")
 max_polyphony = 4
 
 [editable path="Coins"]

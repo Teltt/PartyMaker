@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c7w7oqvfuvb2g"]
+[gd_scene load_steps=22 format=3 uid="uid://c7w7oqvfuvb2g"]
 
 [ext_resource type="PackedScene" uid="uid://bet5igb4qhudb" path="res://Actor/Board/BaseBoard.tscn" id="1_e7sl0"]
 [ext_resource type="PackedScene" uid="uid://lfdnp8ve02fh" path="res://Actor/Space/blue_space.tscn" id="2_y65y2"]
@@ -13,8 +13,17 @@
 [ext_resource type="PackedScene" uid="uid://drt4bmw663eu5" path="res://Actor/Capsule/whomp_capsule.tscn" id="11_dpkwv"]
 [ext_resource type="Script" uid="uid://dwlcslj8s4x4b" path="res://Resource/Params/EventParams.gd" id="12_k0c1q"]
 [ext_resource type="PackedScene" uid="uid://bljsrqva7y8wg" path="res://Actor/Space/star_space.tscn" id="13_txktm"]
+[ext_resource type="PackedScene" uid="uid://dv5p3klgi78ln" path="res://Actor/Event/TurnTypes/TurnOrder.tscn" id="14_x7j4v"]
+[ext_resource type="Script" uid="uid://docaok70ro6jf" path="res://Actor/Event/TurnTypes/classic_party.gd" id="15_2lgaa"]
 
 [sub_resource type="Resource" id="Resource_ur8vp"]
+script = ExtResource("12_k0c1q")
+after_children = false
+before_parent = false
+event_name = ""
+metadata/_custom_type_script = ExtResource("12_k0c1q")
+
+[sub_resource type="Resource" id="Resource_x7j4v"]
 script = ExtResource("12_k0c1q")
 after_children = false
 before_parent = false
@@ -208,6 +217,13 @@ previous_space = [NodePath("../RedSpace3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0049, 5.36463, -1.94456)
 next_space = [NodePath("../OperationSpace2")]
 previous_space = [NodePath("../ItemSpace")]
+
+[node name="TurnOrder" parent="Events" index="0" instance=ExtResource("14_x7j4v")]
+params = SubResource("Resource_x7j4v")
+
+[node name="Classic_Party" type="Node3D" parent="Events/TurnOrder" index="1" node_paths=PackedStringArray("turn_order")]
+script = ExtResource("15_2lgaa")
+turn_order = NodePath("..")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Objects" index="0"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -2.5, 0)
